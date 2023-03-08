@@ -42,4 +42,14 @@ module.exports = {
 
       return res.json(developer)
   },
+
+  async update(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const data = req.body;
+
+    await connection("developers").where("id", id).update(data);
+
+    return res.status(200).json({ message: "success" });
+  },
 };
