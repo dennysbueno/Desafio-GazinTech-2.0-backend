@@ -11,5 +11,6 @@ router.get("/developer/:id", developersController.show);
 
 router.post("/levels", levelsController.create);
 router.get("/levels", levelsController.index);
+router.get("/level/:id", levelsController.show);
 
 module.exports = router;

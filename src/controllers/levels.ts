@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { CreateLevelRequestBody } from "../interface/levels";
 
-const connection = require("../database/connection")
+const connection = require("../database/connection");
 
 module.exports = {
-  async create(req: Request, res: Response): Promise<Response>{
-    const requestBody = req.body as unknown
+  async create(req: Request, res: Response): Promise<Response> {
+    const requestBody = req.body as unknown;
     const { name } = requestBody as CreateLevelRequestBody;
 
     await connection("levels").insert({
@@ -26,4 +26,12 @@ module.exports = {
       .orderBy("quantity", "desc");
     return res.status(200).json(levels);
   },
-}
+
+  async show(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const level = await connection("levels").select("*").where("id", id);
+
+    return res.json(level);
+  },
+};
