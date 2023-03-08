@@ -44,4 +44,22 @@ module.exports = {
 
     return res.status(200).json({ message: "success" });
   },
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const developerUsingLevel = await connection("developers")
+      .where("id", id)
+      .first()
+    
+    if (developerUsingLevel)
+    {
+      return res.status(501)
+      .json({ message: "Não é possivel deletar esse nivel, pois há desenvolvedores cadastrados."})
+    }
+
+    await connection("levels").where("id", id).delete();
+
+    return res.status(204).send();
+  },
 };

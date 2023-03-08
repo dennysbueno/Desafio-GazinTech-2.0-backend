@@ -15,5 +15,6 @@ router.post("/levels", levelsController.create);
 router.get("/levels", levelsController.index);
 router.get("/level/:id", levelsController.show);
 router.put("/level/:id", levelsController.update);
+router.delete("/level/:id", levelsController.delete);
 
 module.exports = router;
