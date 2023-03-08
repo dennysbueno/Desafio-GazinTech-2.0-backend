@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { CreateDeveloperRequestBody } from "../interface/developers";
 
-const connection = require("../database/connection")
+const connection = require("../database/connection");
 
 module.exports = {
-  async create(req: Request, res: Response): Promise<Response>{
-    const requestBody = req.body as unknown
-    const { name, age, gender, team, levelId } = requestBody as CreateDeveloperRequestBody;
+  async create(req: Request, res: Response): Promise<Response> {
+    const requestBody = req.body as unknown;
+    const { name, age, gender, team, levelId } =
+      requestBody as CreateDeveloperRequestBody;
 
     await connection("developers").insert({
       name,
@@ -29,4 +30,16 @@ module.exports = {
 
     return res.status(200).json(developers);
   },
-}
+
+  async show(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const developer = await connection("developers")
+      .join("levels", "levels.id", "=", "developers.levelId")
+      .select(["developers.*", "levels.name as levelName"])
+      .where("developers.id", id)
+      .first();
+
+      return res.json(developer)
+  },
+};
