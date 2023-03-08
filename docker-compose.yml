@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  api:
+    container_name: test-backgazin
+    image: dennysbueno/node-gazintech2.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/app
