@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string("age").notNullable();
     table.string("gender").notNullable();
     table.string("team").notNullable();
-    table.integer("levelId").notNullable().references("id").inTable("levels").onUpdate("CASCADE").onDelete("RESTRICT");
+    table.integer("levelId").unsigned().notNullable().references("id").inTable("levels").onDelete("RESTRICT");
   })
 }
 
