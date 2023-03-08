@@ -52,4 +52,13 @@ module.exports = {
 
     return res.status(200).json({ message: "success" });
   },
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    await connection("developers").where("id", id).delete();
+
+    return res.status(204).send();
+  },
+
 };
