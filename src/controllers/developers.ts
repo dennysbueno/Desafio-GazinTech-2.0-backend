@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { CreateDeveloperRequestBody } from "../interfaces/developers";
+import { connection } from "../database/connection";
 
-const connection = require("../database/connection");
-
-module.exports = {
+export default {
   async create(req: Request, res: Response): Promise<Response> {
     const requestBody = req.body as unknown;
     const { name, age, gender, team, levelId } =

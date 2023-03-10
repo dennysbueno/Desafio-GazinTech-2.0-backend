@@ -1,9 +1,8 @@
 import { Router } from "express";
+import developersController from "./controllers/developers";
+import levelsController from "./controllers/levels";
 
 export const router: Router = Router();
-
-const developersController = require("./controllers/developers");
-const levelsController = require("./controllers/levels");
 
 router.post("/developers", developersController.create);
 router.get("/developers", developersController.index);
@@ -16,5 +15,3 @@ router.get("/levels", levelsController.index);
 router.get("/level/:id", levelsController.show);
 router.put("/level/:id", levelsController.update);
 router.delete("/level/:id", levelsController.delete);
-
-module.exports = router;
