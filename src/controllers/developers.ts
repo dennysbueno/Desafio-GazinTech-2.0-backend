@@ -40,7 +40,7 @@ module.exports = {
       .where("developers.id", id)
       .first();
 
-      return res.json(developer)
+    return res.json(developer);
   },
 
   async update(req: Request, res: Response): Promise<Response> {
@@ -60,5 +60,4 @@ module.exports = {
 
     return res.status(204).send();
   },
-
 };
