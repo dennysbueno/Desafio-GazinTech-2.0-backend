@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateDeveloperRequestBody } from "../interface/developers";
+import { CreateDeveloperRequestBody } from "../interfaces/developers";
 
 const connection = require("../database/connection");
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateLevelRequestBody } from "../interface/levels";
+import { CreateLevelRequestBody } from "../interfaces/levels";
 
 const connection = require("../database/connection");
 
