@@ -5,13 +5,13 @@ import { connection } from "../database/connection";
 export default {
   async create(req: Request, res: Response): Promise<Response> {
     const requestBody = req.body as unknown;
-    const { name, age, gender, team, levelId } =
+    const { name, birthdate, gender, team, levelId } =
       requestBody as CreateDeveloperRequestBody;
 
     await connection("developers").insert({
       name,
       gender,
-      age,
+      birthdate,
       team,
       levelId,
     });

@@ -1,7 +1,7 @@
 export interface CreateDeveloperRequestBody {
   id: number;
   name: string;
-  age: number;
+  birthdate: Date;
   gender: string;
   team: string;
   levelId: number;
