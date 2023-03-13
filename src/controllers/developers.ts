@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { query, Request, Response } from "express";
 import { CreateDeveloperRequestBody } from "../interfaces/developers";
 import { connection } from "../database/connection";
 
@@ -22,10 +22,16 @@ export default {
   },
 
   async index(req: Request, res: Response) {
+    const { name } = req.query;
     const developers = await connection("developers")
       .join("levels", "levels.id", "=", "developers.levelId")
       .select(["developers.*", "levels.name as levelName"])
-      .orderBy("name", "asc");
+      .orderBy("name", "asc")
+      .modify((queryBuilder) => {
+        if (name) {
+          queryBuilder.where('developer.name', 'like', `%${name}%`)
+        }
+      });
 
     return res.status(200).json(developers);
   },
